@@ -1,0 +1,22 @@
+#This document is mainly about some command of websocket
+
+
+//establish a new connection:
+var socket=new WebSocket(´we://echo.websocket.org´)
+
+//the url mentioned above is a public address that can be used for testing
+
+//four Web Socket API events-
+	open message close error
+
+//send() action explaination
+
+//get text view and button for submitting the message
+var textsend=document.getElementById(´text-view´);
+var submitMsg=document.document.getElementById('tsend-button')
+
+//Handling the click event
+submitMsg.onclick=function(){
+	//Send the data
+	socket.send(textsend.value)
+}

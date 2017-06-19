@@ -1,0 +1,14 @@
+########
+this is some tips about setting
+########
+1 set the vim tab to be 4 
+	:set tabstop=4
+	:set shiftwidth=4
+	:set expandtab
+	(:set softtabstop=4)
+2 set vim to use specfic settings when editing a particular filetype
+	autocmd Filetype css setlocal tabstop=4
+	
+	to make the change perminate, add it t~/.vimrc or ~/.vim/vimrc
+	set tabstop=4
+

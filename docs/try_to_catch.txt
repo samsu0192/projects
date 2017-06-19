@@ -1,0 +1,11 @@
+Note that this function makes use of the string formatting operator about which we just learned. if you are still having trouble with this idea, take a look at the HTML file that opened in your new Firefox tab and you should see how this wwoked.
+
+in the HTML file and trace back how the program knew to put the URL value there.
+
+The function also calls the Python datetime library to determine the current time and date. Like the string formatting operator %s, this library uses the % as replacements for values. In this case, the %Y %m %d %H %M %S represents year,month,date,hour,minite and second respectively.
+Unlike the %s, the program will determine the value of these variables for you using your computer's clock. It is important to recognize this difference.
+
+This date metadata,along with the name of the program that called the function, is stored in the HTML title tag. The HTML file that is created has the same name as the Python program that creates it, but with a .html extension rather than a .py one
+Putiing it all together
+Now we can create another version of our program to compute frequnencies.
+Instead of sending its output to a text file or an output window, it sends the output to an HTML file which is opened in a new Firefox tab. From there, the program's output can be added easily as bibliographic engries to Zotero

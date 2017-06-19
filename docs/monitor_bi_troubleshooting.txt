@@ -1,0 +1,17 @@
+this is a file about troubleshooting of machine powerbi
+
+here is the code for the NextOccurence
+
+NextOccurence=
+	FIRSTNONBLANK(
+		SELECTCOLUMNS(
+			FILTER(
+				quipment_log,
+				AND(
+					EARLIER(equipment_log[equipment])=equipment_log[equipment],
+					EARLIER(equipment_log[timestamp])<equipment_log[timestamp])
+),
+'timestamp',
+[timestamp]
+),1
+)

@@ -1,0 +1,29 @@
+This is the vi notes
+3 use h,j,k,l to move the curse around
+4 w move the the start of next word; e move to the end of word; b move to the beginning of the word
+5 moving muliple times: 3w is moving three times the next word
+6 insert text repeatedly 30i - insert - 30 times
+******************************
+7 find a charcter:f or F: ex. fo finds next o
+8 use % to go to the matched ( { [
+9 reach the beginning of a line, press 0; go to the end of line:$
+10 finde the next occurenece of the word under cursor with *, previous with #
+11 gg to the beginning of files;G to the end
+12 search text /+ text you want to search; n for next and N for previous
+13 insert new line
+to insert new line: o to insert after the line; O to insert before the line.
+14 go to r mode to replace only one word
+       
+14.5 redo ctrl+r undo u
+14.6
+        :q to quit
+        :q! to quit without saving
+        :wq to write and quit
+        :wq! to wrte and quit if file has only read permission
+        :x to write and quit
+        :qa to quit all       
+16 delete: d is the delete commmand, you can combine it with movement, e.g. dw 
+deletes teh fisrt word on the right side of the cursor; It also copy the content, so that you can paste it with p to another location
+
+17 repeat the previous comand, press .
+

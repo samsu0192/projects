@@ -43,3 +43,8 @@ send()	#this action is usually for some communication with the server, which inc
 close() #This method stand for goodbye handshake. It terminates the connection completey and no data can be trasferred until the connection is re-established
 
 It is a good practice to provide appropriate feedback to the users waiting for the Web Socket connection to be established.However it is always noted that Web Socket connections are comparatively fast
+
+
+19/06/17 22:48 update
+//need to learn about KAAZING
+//need to explore about how to send file to local webpage

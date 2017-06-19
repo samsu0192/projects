@@ -1,3 +1,0 @@
-#can open a WebSocket connection simply by calling the WeblSocket construcotr:
-
-var connection= new WebSocket('ws://html5rocks.websocket.org/echo',['soap','xmpp']);

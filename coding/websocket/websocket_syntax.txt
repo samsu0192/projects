@@ -1,0 +1,50 @@
+#simple example of initial request headers is as follow --
+
+GET ws://websocket.example.com/HTTP/1.1
+Origin: http://example.com
+Conection:Upgrade
+Host:websocket.example.com
+Upgrade:websocket
+
+#for initializing the connectio, creation of Javascript object with the URL with the remote or local server is required.
+
+var socket =new WebSocket("ws://echo.websocket.org");
+
+# The URL mentioned is a public address that can be used for testing and experiments.
+
+#A chat message, which is sent with the help of send() action, is as follows-
+
+//get text view and button for submitting the message
+var textsend=document.getElementById('text-view');
+var submitMsg=document.getElementById(tsend-button);
+
+//Handling the click event
+submitMsg.onclick=function(){
+//Send the data
+socket.send(textsend.value);
+}
+
+
+//example of close() fucntion
+var textsend=document.getElementById("text-view");
+var buttonStop=document.getElementById("stop-button");
+
+//Handling the click event
+buttonStop.onclick=function(){
+	//Close the connection if open
+	if (socket.readyState==WebSocket.OPEN){
+	socket.close();
+}
+}
+
+#close deliberately
+socket.close(1000,"Deliberate Connection");
+
+//example of open connection
+var socket=new WebSocket('ws://echo.websocket.org')
+socket.onopen=fucntion(event){
+	console.log("connection established")
+	//Display user friendly messages for the successful of connection
+	var.label=document.getElementById('status');
+	label.innerHTML="connection established"
+}

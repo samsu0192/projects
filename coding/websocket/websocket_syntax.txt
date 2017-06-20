@@ -48,3 +48,39 @@ socket.onopen=fucntion(event){
 	var.label=document.getElementById('status');
 	label.innerHTML="connection established"
 }
+
+
+//onerror good practice: inform the user about the unexpected error and try to reconnect them.
+
+socket.onclose=function(event){
+	console.log("Error occureed.")
+	
+	//Inform the user about the error.
+	var label=document.getElementById("status-label")
+	label.innerHTML="Error:"+event;
+}
+
+//check whether online
+if (navigator.online){
+	alert("You are Online");
+}else {
+	alert("You are Offine");
+}
+
+//example of onclose
+socket.onclose=function(event){
+	//Connection closed.
+	//Firstly,check the reason.
+
+	if (even.code !=1000){
+		//Error code 1000 means that the connection was closed
+		//Try to recoonect.
+		
+		if (!navigator.online){
+			alert("You are offline. Please connect to the Internet and try again.")
+}
+}
+}
+
+
+

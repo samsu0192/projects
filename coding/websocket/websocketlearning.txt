@@ -48,3 +48,9 @@ It is a good practice to provide appropriate feedback to the users waiting for t
 19/06/17 22:48 update
 //need to learn about KAAZING
 //need to explore about how to send file to local webpage
+
+The above HTML5 and JavaScript file shows the implementation of two events of Web Socket,namely-
+
+	onLoad which helps in creation of JavaScript object and initialization of connection
+
+	onOpen establishes connection with the server and also sends the status

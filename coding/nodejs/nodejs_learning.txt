@@ -1,0 +1,9 @@
+#this document is for learning of nodejs simple syntax
+
+npm install --save <package>
+//install a package
+
+var express=require('express')
+//include local package
+
+//include() is for include modules from outside node_modules folder

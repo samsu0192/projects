@@ -84,3 +84,19 @@ socket.onclose=function(event){
 
 
 
+//example of onmessage
+connection.onmessage=function(e){
+	var server_message=e.data
+	console.log(server_message);
+}
+
+//the declaration of binary data is done as follows
+socket.binaryType="arrayBuffer";
+socket.binaryType="blob"
+
+//determining the data type mentioned below
+socket.onmessage=fucntion(event){
+	if(typeOf event.data === String){
+		console.log("Received data string");
+}
+}

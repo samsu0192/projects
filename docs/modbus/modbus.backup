@@ -1,9 +1,6 @@
 #!/usr/bin/python
 from pymodbus.client.sync import ModbusSerialClient
 import time
-#import bottle
-
-#@route('/modbus')
 
 #port parameter settings
 totalport=8
@@ -32,8 +29,6 @@ class DI():
 di=DI()
 sam.read_coils(0,counter=totalport,unit=1)
 sam.socket.timeout=.1
-
-#run(host='localhost',port=8080,debug=True)
 
 while(1):
     di.read()

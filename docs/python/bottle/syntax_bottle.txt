@@ -1,0 +1,51 @@
+# this is a document to show simple syntax about bottle module
+
+//start with a hello world example
+@route('/hello')
+def hello():
+	return "Hello World!"
+
+run(host='localhost',port=8080,debug=True)
+
+//after run the script vist localhost:8080/hello
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//SimpleTemplate implements the basetemplate API:
+
+from bottle import SimpleTemplate
+tpl=SimpleTemplate('Hello {{name}}!')
+tpl.render{name='world'}
+
+>>> u'Hello World!'
+
+//pass a dictionary into the template
+
+from bottle import template
+my_dict={'number':'123','street':'Fake St.','city':'Fakeville'}
+template{'I live at {{number}} {{street}},{{city}}',**my_dict}
+
+>>>u'I live at 123 Fake St.
+
+
+

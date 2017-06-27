@@ -1,7 +1,7 @@
 from bottle import route, run, error,template
 from bottle import static_file
+import os
 
-from bottle import static_file
 @route('/')
 def hello():
 	return ''' hello world <br>
@@ -24,14 +24,28 @@ def testing():
 				setInterval(writeToScreen,3000)
 			}
 			function writeToScreen(){
-				
 
+				var pre=document.createElement('p');
+				pre.sytle.wordWrap="break-word";
+				pre.innerHTML='hello world'
+				output.appendChild(pre);
 			}
 			</script>
 		<body onload='startTimer()'>
-		<p id='loadhere'></p>
+		<div id='output'>hello world</div>
 		</body>
 		'''
+#@route('/static/<filepath:path>')
+#def server_static(filepath):
+	#	return static_file(filepath,root='/static')
+#@route('/static/test')
+#def server_static():
+#	return static_file('test.html',root=os.path.dirname(os.path.abspath('test.html')))
+
+@route('/static/<filename>')
+def server_static(filename):
+	return static_file(filename,root=os.path.dirname(os.path.abspath(filename)))
+
 @error(404)
 def error404(error):
 		return '''<dir id='error' style='text-align:center'>

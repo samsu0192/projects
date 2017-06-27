@@ -1,0 +1,131 @@
+#this text is for simply bottle syntax
+
+#quick start: Hello World
+
+from bottle import route, run
+@route('/hello')
+def hello():
+	return "Hello World!"
+
+run(host='localhost',port=8080,debug=True)
+
+// or rather, we could create a sep application object and use instead of global one:
+
+from bottle import Bottle, run
+app=Bottle()
+@app.route('/hello')
+def hello():
+	return "Hello World!"
+
+run(app,host='localhost',port=8080)
+
+//
+/* The route() decorator links an URL path to a callback function, lets try adnother example*/
+
+from bottle import Bottle,run,template
+@route(/hello')
+def hello():
+	return "Hello World!"
+@route('/')
+@route('hello/<name>')
+def great(name='Stranger'):
+	return template('Hello {{name}}, how are you?',name=name)
+
+
+//DYNAMIC ROUTES
+#routes that contain wildcards are called dynamic routes and match more than one URL at the same time. eg. route /hello/<name> accept /hello/alice as well as /hello/bob
+
+@route('/wiki/<pagename>')		#matches /wiki/Learning_Python
+def show_wiki_pate(pagename):
+	...
+
+//The following filters are implemented by default and more may be add:
+
+/*	:int matches(signed) digits only 
+	:float
+	:path matches all characters including the slash character 
+	:re allows for custom regular expression
+
+
+@route('/object/<id:int>')
+def callback(id):
+	assert isinstance(id,int)
+
+@route('/show/<name:re:[a-z]+>')
+def callback(name):
+	assert name.isalpha()
+
+@route('/static/<path:path>')
+def callback(path):
+	return static_file(path,...)
+
+#HTTP REQUEST METHODS
+
+from bottle import get,post,request # or route
+
+@get('/login') # or @route('/login')
+def login():
+	return '''
+		<form action="/login" method="post">
+			Username: <input name='username' type='text' />
+			Password: <input name='password' type='password' />
+			input value=<'Login' type='submit' />
+		</form>
+	'''
+
+@post('/login') # or @route ('/login', method='POST')
+def do_login():
+	username=request.forms.get('username')
+	password=request.forms.get('password')
+	if check_login(username,password):
+		return "<p>Your login information was correct.</p>"
+	else:
+		return "<p>Login failed.</p>"
+
+// in this example the /login URL is linked to two distinct callbacks, one for GET requests and another for POST requests.
+// The first one displays a HTML form to user. The second call back is invoded on a form sumission and checks the login credentials the user entered into the form.
+
+#Special Methods: HEAD and ANY
+
+The HEAD method is used to ask for the response identical to the one that would correspond to a GET request, but without the response body. This is useful for retrieving meta-information about a resource without having to downlaod the entire document.
+
+//ROUTING STATIC FILES
+//Static files such as images or Css files are not served automatically. You have to add a route and a callback to control which files get served and where to find them:
+
+from bottle import static_file
+@route('/static/<filename>')
+def server_static(filename):
+	return static_file(filename,root='/path/to/your/static/files')
+
+//if you want to refer to the file in a different path
+
+@route('/static/<filepath:path>')
+def server_static(filepath):
+	return static_file(filepath, root='path/to/your/static/files')
+
+//ERROR PAGES
+
+from bottle import error
+@error(404)
+def error404(error):
+	return 'Nothing here, sorry'
+
+//Error handelers are used only if your application returns or raises an HTTPError excetion (abort() does just that). Changing Request.status or returning HTTPResponse won't trigger the error handler.
+
+
+#HTTP ERRORS AND REDIRECTS
+//abort() is a shorcut for generating HTTP error pages.
+
+@route('/restricted')
+def restricted():
+	abort(401,"Sorry,access denied.")
+
+//To redirect a client to a different URL, you can send a 303 response with the Location headers set to the new URL. redirect() does that for you:
+from bottle import redirect
+@route('/wrong/url')
+def wrong():
+	redirect("/right/url")
+
+
+//HTTP HEADERS
+# all HTTP headers sent by the client(e.g. Referer, Agent or Accept-Language) are sotred in a WSGIHeaderDict and accessible throught the BaseRequest.headers attribute.

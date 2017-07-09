@@ -1,0 +1,20 @@
+#this is a document about small python techniques
+
+//print techniques
+'''
+def fun():
+	return '{0} Here is a really long'
+'sentence with {1}'.format(3,5)
+
+fun()
+>>> '3 Here is a really longsentence with 5'
+'''
+
+//vim techniques
+'''
+#repeat the previous command,press.
+#redo ctrl+r undo u
+
+'''
+
+

@@ -6,8 +6,8 @@ def hello():
 	 return "Hello World!"
 @route('/')
 @route('/hello/<name>')
-def greate(name='Sranger'):
-		return template('Hello {{name}}, how are you?',name=name)
+def greate(name):
+		return template('Hello {{a}}, how are you?',a=name)
 
 @route('/login')
 def login():

@@ -1,5 +1,0 @@
-About Grep
-egrep [commmand line options] <pattern> [path]
-
-eg:	egrep 'mellon' mysampledata.txt
-

@@ -1,0 +1,26 @@
+#this is about express package, express is like bottle in python
+
+//initial server
+'''
+#import module
+var express=require('express');
+#set server name
+var app=express();
+#inital server use createServer function in 'http' module
+var server=require('http').createServer(app);
+'''
+
+//initial websocket
+'''
+var io=require('socket.io')(server);
+io.on('connection',function(socket){
+	socket.on('message',function(data){
+		console.log(data);
+	#tell the client to execute 'message'
+	socket.braudcast.emit('message',{message:data
+});
+});
+});
+
+server.listen(3000)
+'''

@@ -12,7 +12,7 @@ io.on('connection',function(socket){
 	socket.on('message',function(data){
 		console.log(data);
 	//we tell the client to execute 'message'
-	socket.bradcast.emit('message',{message:data
+	socket.braudcast.emit('message',{message:data
 	});
 	});
 });

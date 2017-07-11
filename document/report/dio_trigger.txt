@@ -1,6 +1,6 @@
 #this is a testing report of DIO trigger situation
-#we link DIO to raspberry pi to test the minimal register volage
-#input volatage source:5.25v 
+#we link DIO to raspberry pi to test the minimal register voltage
+#input voltage source:5.25v 
 
 //use 1k ohm and 3.3k ohm as divider
 DIO voltage:	 1.16v
@@ -28,14 +28,14 @@ comment: di port will not work in 2.23v situation, but will work in 2.43v situat
 '''
 
 //use 2k ohm and 2k ohm as devider
-//turning the input voltage from 5.25v slowly up, we detected the minimum register voltage for the dio port will be around 2.23v
-//in DIO voltage 2.23v situation, we tested all 8 port will be succeceed registerd.
+//turning the input voltage from 5.25v slowly up, we detected the minimum register voltage for the dio port will be around 2.33v
+//in DIO voltage 2.23v situation, we tested all 8 port will be succeceed registered.
 
 '''
-comment: 2.23v can be treat as the DIO register voltage
+comment: 2.33v can be treat as the DIO register voltage
 '''
 
-//the monitor can be done in yota ultility, however, if you want to use pi python language to monitor, below is the syntax:
+//the monitor can be done in yotta utility, however, if you want to use pi python language to monitor, below is the syntax:
 
 //install module before use
 '''

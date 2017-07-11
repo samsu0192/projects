@@ -1,5 +1,15 @@
 #some idea think out during the weekend
 
+//redesign of unibeat
+'''
+DIO can work upon 5v
+#remove power socket, psu?
+#remove dio, since only 3 singal needed upon now?
+#bind together psu and pi, screen support multiple pi?
+#choose a smaller box?
+#use 5v adapter?
+'''
+
 //
 use voice instead alert will be better remind method
 

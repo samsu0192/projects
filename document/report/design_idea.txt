@@ -24,6 +24,11 @@ for emergency situation, servo must be able to turn by hand, but once turn by ha
 PCB board side:
 can print out the circuit to save time and money
 
+//PCB board default:
+will trigger on for a short moment when off power
+will trigger on for a short moment when rotate to a certain angle
+
+
 //about digital box
 # buy long rj45 F/M cut in middle can save some material
 # use a big box for all 3 shelf, which means 4 rj45 ports, 1 power socket needed

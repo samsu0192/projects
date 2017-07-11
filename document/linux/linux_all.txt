@@ -16,7 +16,7 @@ git push origin master
 '''
 set tht vim tab to be 4
 	:set tabstop=4
-	:set shift width=4
+	:set shiftwidth=4
 	:set expandtab
 	(:set softtabstop=4)
 sytax on

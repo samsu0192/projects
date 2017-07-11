@@ -1,4 +1,18 @@
-# this is a document about small html techniques
+#this is a document about small html techniques
+
+//add nbsp and backspace to string
+'''
+'\xa0'
+'<br>'
+'''
+
+//show time in utc and in local
+'''
+#UTC
+new Date().toISOString().replace('T',' ').substr(0,19)
+#local
+
+'''
 
 //how to interval repeat
 '''
@@ -29,3 +43,4 @@ console.log(__dirname);
 console.log(path.dirname(__filename))
 #show filename
 console.log(__filename)
+'''

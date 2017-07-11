@@ -49,7 +49,7 @@ import time
 '''
 
 //define modport
-modport='/dev/serial/by-id/usb-ATC_High_Speed_USB_To_RS-485_DAMWDJL-if00-port0'
+modport='/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_AI04UGGP-if00-port0'
 
 //initial communication
 mymodbus=ModbusSerialClient(method='rtu',port=modport,baudrate=9600)

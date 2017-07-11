@@ -24,21 +24,23 @@ class DI():
         prestatus.append(0)
     def read(self):
         self.status_all=mymodbus.read_coils(0,count=totalport,unit=1)
+        time.sleep(0.05)
         for i in range(0,totalport):
             self.status[i]=self.status_all.bits[i]
-	def write(self):
-		for i in range(0,totalport):
-			if self.status[i]==True:
-				if self.status[i]!=self.prestatus[i]:
-					self.counter[i]+=1
-					for j in monitor_port:
-						counter_all='port'+str(i)+':'+str(di.counter[i])+' '
-					print 'LED%d is on,Total: '+counter_all
-			self.prestatus[i]=self.status[i]
 di=DI()
 
 #run(host='localhost',port=8080,debug=True)
 
 while(1):
     di.read()
-	di.write()
+    for i in range(0,totalport):
+        if di.status[i]==True:
+            if di.status[i]!=di.prestatus[i]:
+                di.counter[i]+=1
+                print("LED%d is on,Total:" %i)
+                counter_all=''
+                for i in monitor_port:
+                    counter_all+='port'+str(i)+':'+str(di.counter[i])+' '
+                print(counter_all)
+    for i in range(0,totalport):
+        di.prestatus[i]=di.status[i]

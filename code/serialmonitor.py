@@ -2,7 +2,7 @@
 from pymodbus.client.sync import ModbusSerialClient
 import time
 
-modport='/dev/serial/by-id/usb-ATC_High_Speed_USB_To_RS-485_DAMWDJL-if00-port0'
+modport='/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_AI04UGGP-if00-port0'
 sam=ModbusSerialClient(method='rtu',port=modport,baudrate=9600)
 counter1=counter3=counter5=0
 status1=status3=status5=False

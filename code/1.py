@@ -1,5 +1,6 @@
 from pymodbus.client.sync import ModbusSerialClient
 import time
+import sys
 totalport=8
 monitor_port=[1,3,5]
 modport='/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_AI04UGGP-if00-port0'
@@ -7,7 +8,7 @@ mymodbus=ModbusSerialClient(method='rtu',port=modport,baudrate=9600)
 mymodbus.read_coils(0,count=totalport,unit=1)
 mymodbus.socket.timeout=.1
 print 'test can begin'
-
+sys.stdout.flush()
 class DI():
 	status=[]
 	counter=[]
@@ -26,14 +27,16 @@ class DI():
 				if self.status[i]!=self.prestatus[i]:
 					self.counter[i]+=1
 					counter_all=''
-					for i in monitor_port:
-						counter_all+='port'+str(i)+':'+str(self.counter[i])+' '
+					for j in monitor_port:
+						counter_all+='port'+str(j)+':'+str(self.counter[j])+' '
 					print 'LED%d is on,Total: '%i + counter_all
+					sys.stdout.flush()
 		for i in range(0,totalport):
 			self.prestatus[i]=self.status[i]
 
-di=DI()
+if __name__=='__main__':
+	di=DI()
 
-while (1):
-	di.read()
-	di.write()
+	while (1):
+		di.read()
+		di.write()

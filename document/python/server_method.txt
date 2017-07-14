@@ -1,0 +1,119 @@
+#server_method.txt
+
+//echo back example
+'''
+class MyServerProtocol(WebSocketServerProtocol):
+	def onMessage(self,payload,isBinary):
+		##echo back message verbatim
+		self.sendMessage(payload,isBinary)
+'''
+
+//focus on twisted,protocol will be
+'''
+from autobahn.twisted.websocket import WebSocketServerProtocol
+'''
+
+//receiving messages
+'''
+when our server receives a WebSocket message,the
+autobahn.websocket.interfaces.IWebSocketChaneel.onMessage() 
+wiill fire with the message payload received
+'''
+
+//decode the message
+'''
+when the payload is text(isBinary==False),the bytes received will be an UTF9 encoded string. To process text payloads:
+s=payload.decode('utf8')
+'''
+
+//decode json message
+'''
+import json
+obj=json.loads(pyload.decode('utf8'))
+'''
+
+//send message
+'''
+autobahn.websocket.interfaces.IWebSocketChannel.sendMessage()
+
+payload=s.encode('utf8')
+self.sendMessage(payload,isBinary=False)
+'''
+
+//send json message
+'''
+import json
+payload=json.dumps(obj,ensure_ascii=False).encode('utf8')
+'''
+
+//running a server in twisted way
+
+'''
+if __name__=='__main__':
+	import sys
+#Setup Twisted logging
+	from twisted.pyton import log
+	from twisted.internet import reactor
+	log.startLogging(sys.stdout)
+
+#Create a autobahn.twisted.websocket.WebSocketServerFactory
+#set MyServerProtocol on the factory
+	from autobahn.twisted.websocket import WebSocketFactory
+	factory=WebSocketServerFactory()
+	factory.protocol=MyServerProtocol
+	
+#Start a server using the factory,listening on TCP port 9000
+	reactor.listenTCP(9000,factory)
+	reactor.run()
+'''
+
+//connection lifecycle
+'''
+#Autobahn will fire callbacks on your protocol class whenever the event related to the respective callback occurs
+
+#core callback
+autobahn.websocket.interfaces.IWebSocketChannel.onConnect()
+autobahn.websocket.interfaces.IWebSocketChannel.onOpen()
+autobahn.websocket.interfaces.IWebSocketChannel.onMessage()
+autobahn.websocket.interfaces.IWebSocketChannel.onClose()
+'''
+
+//opening handshake
+'''
+#onConnect() will fire with 
+#autobahn.websocket.protocol.ConnectionRequest
+#providing information on the client wishing to connect via WebSocket.
+
+class MyServerProtocol(WebSocketServerProtocol):
+	def onConnect(self,request):
+		print("Client connecting:{}".format(request.peer))
+'''
+
+'''
+#on the other hand, for a WebSocket client protocol,onConnect() will fire with 
+#autobahn.websocket.protocol.ConnectionResponse
+#providing information on the WebSocket connection that was accepted by the server
+
+class MyClientProtocol(WebSocketClientProtocol):
+	def onConnect(self,response):
+		print('Connected to Server: {}'.format(response.peer))
+
+'''
+
+//connection open
+#the autobahn.websocket.interfaces.IWebSocketChannel.onOpen()
+#callback fires when the WebSocket opening handshake has been successfully complted
+
+class MyProtocol(WebSocketProtocol):
+	def onOpen(self):
+		print('WebSocket connection open.')
+
+//connection close
+
+#when the websocket connection has closed, the 
+#autobahn.websocket.interfaces.IwebSocketChannel.onClose() callback fires.
+
+class MyProtocol(WebSocketProtocol):
+	def onClose(self,wasClean,code,reason):
+		print('WebSocket connection closed: {}'.format(reason))
+

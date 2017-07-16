@@ -1,5 +1,5 @@
 from autobahn.twisted.websocket import WebSocketClientProtocol,\
-		WebScoketClientFactory
+		WebSocketClientFactory
 
 class MyClientProtocol(WebSocketClientProtocol):
 	def onConnect(self,response):
@@ -26,7 +26,7 @@ class MyClientProtocol(WebSocketClientProtocol):
 	def onClose(self,wasClean,code,reason):
 		print('WebSocket connection closed: {0}'.format(reason))
 
-if __name__='__main__':
+if __name__=='__main__':
 	
 	import sys
 	from twisted.python import log
@@ -34,7 +34,7 @@ if __name__='__main__':
 
 	log.startLogging(sys.stdout)
 
-	factory=WebSocketClientFacotry(u'ws://127.0.0.1:9000')
+	factory=WebSocketClientFactory(u"ws://127.0.0.1:9000")
 	factory.protocol=MyClientProtocol
 
 	reactor.connectTCP('127.0.0.1',9000,factory)

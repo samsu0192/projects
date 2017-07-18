@@ -15,25 +15,16 @@ class MyServerProtocol(WebSocketServerProtocol):
 	def onMessage(self,payload,isBinary):
 		if isBinary:
 			print('Binary message received: {0} bytes'.format(len(payload)))
-
-		elif(payload='trigger'):
-			print('received'+payload)
+		elif(payload=='trigger'):
+			print 'trigger received:{0}'.format(payload)	
+			print 'send message to the html'+self.payload_data
+			self.sendMessage(self.payload_data)
+			self.prepayload_data=self.payload_data
 		else:
-			print('received other message')
-		'''	
-		elif(payload.decode('utf8')!='trigger'):
-			self.payload_data=payload.decode('utf8')
+			self.payload_data=payload
 			print 'Text message received: {0}'.format(self.payload_data)
 			self.sendMessage(('new:'+self.payload_data).encode('utf8'))
 			self.sendMessage(('old'+self.prepayload_data).encode('utf8'))
-		elif(self.payload_data!=self.prepayload_data):
-			print 'trigger received:{0}'.format(payload.decode('utf8'))	
-			print 'send message to the html'+self.payload_data
-			self.sendMessage(self.payload_data.encode('utf8'))
-			self.prepayload_data=self.payload_data
-		else:
-			pass
-		'''
 	def onClose(self,wasClean,code,reason):
 		print('WebSocket connection closed: {0}'.format(reason))
 	

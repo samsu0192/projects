@@ -1,7 +1,7 @@
 import sys
 from twisted.internet import reactor
 from twisted.python import log
-fromt twisted.web.server import Site
+from twisted.web.server import Site
 from twisted.web.static import File
 
 from autobahn.twisted.websocket import WebSocketServerFactory,\
@@ -30,7 +30,7 @@ class BroadcastServerFactory(WebSocketServerFactory):
 	def tick(self):
 		self.tickcount += 1
 		self.broadcast('tick %d from server'%self.tickcount)
-		reactor.call:ater(1,self.tick)
+		reactor.callLater(1,self.tick)
 	def register(self,client):
 		if client not in self.clients:
 			print('registered client {}'.format(client.peer))
@@ -39,6 +39,23 @@ class BroadcastServerFactory(WebSocketServerFactory):
 		if client in self.clients:
 			print("unresigtered client {}".format(client.peer))
 			self.clients.remove(client)
-	def bradcast(self,msg):
-		print("broadcasting message '{}'")
+	def broadcast(self,msg):
+		print("broadcasting message '{}'..".format(msg))
+		for c in self.clients:
+			c.sendMessage(msg.encode('utf8'))
+			print('message sent to {}'.format(c.peer))
 
+if __name__=='__main__':
+
+	log.startLogging(sys.stdout)
+
+	ServerFactory=BroadcastServerFactory
+
+	factory=ServerFactory(u'ws://127.0.0.1:9000')
+	factory.protocol=BroadcastServerProtocol
+	listenWS(factory)
+
+	webdir=File(".")
+	web=Site(webdir)
+	reactor.listenTCP(8080,web)
+	reactor.run()

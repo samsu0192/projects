@@ -12,6 +12,7 @@
 				socket.onopen=function(){
 					console.log('connected!');
 					isopen=true;
+					setInterval(sendText,1000)
 				}
 				socket.onmessage=function(e){
 					if (typeof e.data == 'string'){
@@ -34,16 +35,19 @@
 			};
 			function sendText(){
 				if (isopen){
-					socket.send("trigger")
-					console.log("trigger char sent")
+					socket.send("*")
+					console.log('* is send out to server')
 				}	else {
 					console.log("connection not opened.")
 				}
 			};
 			function sendBinary(){
 				if (isopen){
-					socket.send('hello')
-					console.log('hello is sent')
+					var buf= new ArrayBuffer(32)
+					var arr= new Uint8Array(buf);
+					for (i=0;i<arr.length;i++) arr[i]=i;
+					socket.send(buf);
+					console.log("Binary message sent.")
 				}	else {
 					console.log("Connection not opened.")
 				}
@@ -52,8 +56,6 @@
 					</head>
 <body>					
 	<p>Open your browser's JavaScript console to see what's happening (hit F12).</p>
-	<button onclick='sendText();'>Send Text Message </button>
-	<button onclick='sendBinary();'> Send Binary Message </button>
 </body>
 </html>
 						

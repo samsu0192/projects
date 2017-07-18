@@ -34,16 +34,19 @@
 			};
 			function sendText(){
 				if (isopen){
-					socket.send("trigger")
-					console.log("trigger char sent")
+					socket.send("Hello,world!")
+					console.log("Text message sent.")
 				}	else {
 					console.log("connection not opened.")
 				}
 			};
 			function sendBinary(){
 				if (isopen){
-					socket.send('hello')
-					console.log('hello is sent')
+					var buf= new ArrayBuffer(32)
+					var arr= new Uint8Array(buf);
+					for (i=0;i<arr.length;i++) arr[i]=i;
+					socket.send(buf);
+					console.log("Binary message sent.")
 				}	else {
 					console.log("Connection not opened.")
 				}

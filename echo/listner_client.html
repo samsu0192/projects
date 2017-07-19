@@ -17,9 +17,14 @@
 					var text=document.createTextNode(message),
 						el=document.createElement('li'),
 						poollist=document.getElementById('poollist');
-
-						el.appendChild(text)
-						poollist.appendChild(el)
+						physical=document.getElementById('physical')
+		//				document.write(message.substr(0,1))
+						el.insertBefore(text,el.firstChild)
+						if(message.substr(0,1)=='a'){
+								poollist.insertBefore(el,poollist.firstChild)}
+								else{
+							physical.insertBefore(el,physical.firstChild)
+				}
 				}
 				socket.onmessage=function(e){
 					if (typeof e.data == 'string'){
@@ -50,16 +55,22 @@
 				}
 			};
 			function pooling(){
-				setInterval(sendTrigger,500)
+				setInterval(sendTrigger,100)
 			}
 </script>
 					</head>
 <body>					
 	<p>Open your browser's JavaScript console to see what's happening (hit F12).</p>
-	<button onclick='sendTrigger()'>Send Trigger Message </button>
-	<button onclick='pooling()'>Trigger pool </button>
+	send pull request to server: <button onclick='pooling()'>Trigger pool </button>
 	</br>
+	<div style='float:left;width:50%'>
+		<h4>physical client</h4>
+		<ul id='physical'></ul>
+	</div>
+	<div style='float:right;width:50%;'>
+		<h4>soft client</h4>
 	<ul id='poollist'></ul>
+	</div>
 </body>
 </html>
 						

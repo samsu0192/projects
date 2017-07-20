@@ -16,12 +16,12 @@
 				function addMessage(message){
 					var text=document.createTextNode(message),
 						el=document.createElement('li'),
-						poollist=document.getElementById('poollist');
+						soft=document.getElementById('soft');
 						physical=document.getElementById('physical')
-		//				document.write(message.substr(0,1))
 						el.insertBefore(text,el.firstChild)
-						if(message.substr(0,1)=='a'){
-								poollist.insertBefore(el,poollist.firstChild)}
+						//key word to ditribution received message
+						if(message.substr(0,3)=='aux'){
+								soft.insertBefore(el,soft.firstChild)}
 								else{
 							physical.insertBefore(el,physical.firstChild)
 				}
@@ -46,6 +46,7 @@
 					isopen=false;
 				}
 			};
+			//key word 'trigger' send to server to request receive message
 			function sendTrigger(){
 				if (isopen){
 					socket.send("trigger")
@@ -69,7 +70,7 @@
 	</div>
 	<div style='float:right;width:50%;'>
 		<h4>soft client</h4>
-	<ul id='poollist'></ul>
+	<ul id='soft'></ul>
 	</div>
 </body>
 </html>

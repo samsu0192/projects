@@ -61,7 +61,7 @@ mymodbus.read_coils(0,count=8,unit=1)
 mymodbus.socket.timeout=0.1
 
 //status=mymodbus.read_coils(0,count=8,unit=1)
-read coils agaain
+read coils again
 
 //show all 8 port register status
 print status.bits

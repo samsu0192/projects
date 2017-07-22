@@ -16,10 +16,15 @@
 				function addMessage(message){
 					var text=document.createTextNode(message),
 						el=document.createElement('li'),
-						poollist=document.getElementById('poollist');
-
-						el.appendChild(text)
-						poollist.appendChild(el)
+						soft=document.getElementById('soft');
+						physical=document.getElementById('physical')
+						el.insertBefore(text,el.firstChild)
+						//key word to ditribution received message
+						if(message.substr(0,3)=='aux'){
+								soft.insertBefore(el,soft.firstChild)}
+								else{
+							physical.insertBefore(el,physical.firstChild)
+				}
 				}
 				socket.onmessage=function(e){
 					if (typeof e.data == 'string'){
@@ -41,6 +46,7 @@
 					isopen=false;
 				}
 			};
+			//key word 'trigger' send to server to request receive message
 			function sendTrigger(){
 				if (isopen){
 					socket.send("trigger")
@@ -50,16 +56,22 @@
 				}
 			};
 			function pooling(){
-				setInterval(sendTrigger,500)
+				setInterval(sendTrigger,100)
 			}
 </script>
 					</head>
 <body>					
 	<p>Open your browser's JavaScript console to see what's happening (hit F12).</p>
-	<button onclick='sendTrigger()'>Send Trigger Message </button>
-	<button onclick='pooling()'>Trigger pool </button>
+	send pull request to server: <button onclick='pooling()'>Trigger pool </button>
 	</br>
-	<ul id='poollist'></ul>
+	<div style='float:left;width:50%'>
+		<h4>physical client</h4>
+		<ul id='physical'></ul>
+	</div>
+	<div style='float:right;width:50%;'>
+		<h4>soft client</h4>
+	<ul id='soft'></ul>
+	</div>
 </body>
 </html>
 						
